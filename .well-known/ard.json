@@ -1,0 +1,37 @@
+{
+  "entries": [
+    {
+      "@context": "https://agenticresourcediscovery.org/context/v1",
+      "identifier": "urn:air:agenticresources.dev:reference:ard",
+      "displayName": "Agentic Resources — ARD reference",
+      "type": "text/html",
+      "url": "https://agenticresources.dev/",
+      "description": "Independent plain-language reference for the Agentic Resource Discovery specification, with a browser validator, measured adoption and a verified publisher directory.",
+      "representativeQueries": [
+        "what is agentic resource discovery",
+        "how do I publish an ard.json manifest",
+        "which companies publish an ARD catalogue",
+        "validate an ARD entry"
+      ],
+      "capabilities": ["ARDReference", "ARDValidator", "ARDPublisherDirectory"],
+      "tags": ["ard", "discovery", "reference"],
+      "version": "2026.09.04",
+      "updatedAt": "2026-09-04T00:00:00Z"
+    },
+    {
+      "@context": "https://agenticresourcediscovery.org/context/v1",
+      "identifier": "urn:air:agenticresources.dev:dataset:probe-2026-09-04",
+      "displayName": "ARD publisher probe, 4 September 2026",
+      "type": "application/json",
+      "url": "https://agenticresources.dev/data/probe-2026-09-04.json",
+      "description": "Raw results of fetching /.well-known/ard.json and /.well-known/ai-catalog.json on 50 domains, with method.",
+      "representativeQueries": [
+        "how many domains serve an ARD manifest",
+        "do the ARD launch partners publish a catalogue",
+        "ard.json versus ai-catalog.json adoption"
+      ],
+      "tags": ["ard", "adoption", "dataset"],
+      "updatedAt": "2026-09-04T00:00:00Z"
+    }
+  ]
+}

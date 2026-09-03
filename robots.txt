@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Agentmap: https://agenticresources.dev/.well-known/ard.json
+Sitemap: https://agenticresources.dev/sitemap.xml
