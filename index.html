@@ -384,8 +384,8 @@ a:focus-visible,button:focus-visible{outline:1px solid var(--cream); outline-off
         <tbody>
           <tr><td class="f">ARD</td><td>Which capability should I use, and where is it?</td><td class="t">Apache-2.0 · no governing body named · data model from the AI Catalog WG (Linux Foundation)</td></tr>
           <tr><td class="f">MCP</td><td>How do I call this tool?</td><td class="t">Agentic AI Foundation (Linux Foundation)</td></tr>
-          <tr><td class="f">A2A</td><td>How do I delegate to another agent?</td><td class="t">Linux Foundation · v1.0 April 2026</td></tr>
-          <tr><td class="f">WebMCP</td><td>How does a web page expose tools in the browser?</td><td class="t">W3C community group</td></tr>
+          <tr><td class="f">A2A</td><td>How do I delegate to another agent?</td><td class="t">Linux Foundation (donated by Google, 2025)</td></tr>
+          <tr><td class="f">WebMCP</td><td>How does a web page expose tools in the browser?</td><td class="t">W3C community group · draft</td></tr>
           <tr><td class="f">llms.txt</td><td>What should a model read on this site?</td><td class="t">Informal convention</td></tr>
         </tbody>
       </table>
@@ -403,7 +403,7 @@ a:focus-visible,button:focus-visible{outline:1px solid var(--cream); outline-off
         <p class="lede">A manifest is a JSON file with an <code>entries</code> array. <strong>Each entry needs four things:</strong> a domain-anchored <code>identifier</code>, a <code>displayName</code>, a <code>type</code> as an IANA media type, and one of <code>url</code> or <code>data</code>. Add two to five <code>representativeQueries</code> or registries cannot rank you.</p>
         <div class="note">
           <span class="lbl">Identifier</span>
-          <p><code>urn:air:&lt;publisher&gt;:&lt;namespace&gt;:&lt;name&gt;</code>, where the publisher is a domain you control. The prefix is <code>air</code>, not <code>ard</code>. A registry rejects <code>urn:air:google.com:&hellip;</code> unless the trust manifest proves google.com issued it.</p>
+          <p><code>urn:air:&lt;publisher&gt;:&lt;namespace&gt;:&lt;name&gt;</code>, where the publisher is a domain you control. The prefix is <code>air</code>, not <code>ard</code>. A verifying registry rejects <code>urn:air:google.com:&hellip;</code> unless the trust manifest proves google.com issued it.</p>
         </div>
         <div class="note">
           <span class="lbl">Serve it at both paths</span>
@@ -444,7 +444,7 @@ a:focus-visible,button:focus-visible{outline:1px solid var(--cream); outline-off
           <tr><td class="f">application/a2a-agent-card+json</td><td>An A2A agent, pointing at its agent card</td><td class="t">de-facto · IANA pending</td></tr>
           <tr><td class="f">application/ai-skill+md</td><td>A skill file such as SKILL.md</td><td class="t">de-facto</td></tr>
           <tr><td class="f">application/ai-registry+json</td><td>Another ARD registry; this is how federation is discovered</td><td class="t">de-facto</td></tr>
-          <tr><td class="f">application/vnd.oai.openapi+json</td><td>A REST API described by OpenAPI</td><td class="t">registered</td></tr>
+          <tr><td class="f">application/vnd.oai.openapi+json</td><td>A REST API described by OpenAPI</td><td class="t">vendor tree · not named in the spec</td></tr>
         </tbody>
       </table>
     </div>
@@ -620,7 +620,7 @@ a:focus-visible,button:focus-visible{outline:1px solid var(--cream); outline-off
     </details>
     <div class="note">
       <span class="lbl">How to read this</span>
-      <p>Thin publisher adoption days after a v0.91 proposal is unremarkable. The registry side shipped first: GitHub, Hugging Face, Google Cloud and AWS all consume ARD today, so the pressure to publish is arriving from the platforms. The honest comparison is <code>llms.txt</code>: enormous discourse, negligible adoption for a long while, then a default in framework tooling.</p>
+      <p>Thin publisher adoption days after a v0.91 proposal is unremarkable. The registry side shipped first: GitHub's Agent Finder and Hugging Face's Discover tool consume ARD today, and Google Cloud and AWS have announced registries that will, so the pressure to publish is arriving from the platforms. The honest comparison is <code>llms.txt</code>: enormous discourse, negligible adoption for a long while, then a default in framework tooling.</p>
       <p>These numbers appear here because nobody whose business depends on ARD succeeding is in a position to publish them.</p>
     </div>
   </div>
@@ -650,8 +650,8 @@ a:focus-visible,button:focus-visible{outline:1px solid var(--cream); outline-off
       <a href="https://github.com/ards-project/ard-spec"><span class="n">ards-project / ard-spec</span><span class="who">official</span><span class="d">Source, reference implementations and the conformance CLI.</span></a>
       <a href="https://github.blog/changelog/"><span class="n">GitHub Agent Finder</span><span class="who">registry</span><span class="d">Copilot discovers MCP servers, skills and agents at runtime via ARD.</span></a>
       <a href="https://huggingface.co/"><span class="n">Hugging Face Discover</span><span class="who">registry</span><span class="d">Reference ARD implementation over Hub spaces, skills and MCP servers.</span></a>
-      <a href="https://cloud.google.com/"><span class="n">Google Cloud Agent Registry</span><span class="who">registry</span><span class="d">Hosted ARD-aware registry in Gemini Enterprise Agent Platform.</span></a>
-      <a href="https://aws.amazon.com/blogs/machine-learning/agentic-resource-discovery-ard-an-open-specification-for-agent-discovery/"><span class="n">AWS Agent Registry</span><span class="who">registry · preview</span><span class="d">Per-account registries with an MCP endpoint; ARD as the federation layer.</span></a>
+      <a href="https://cloud.google.com/"><span class="n">Google Cloud Agent Registry</span><span class="who">registry · announced</span><span class="d">Hosted registry in Gemini Enterprise Agent Platform; native ARD support announced for the coming months.</span></a>
+      <a href="https://aws.amazon.com/blogs/machine-learning/agentic-resource-discovery-ard-an-open-specification-for-agent-discovery/"><span class="n">AWS Agent Registry</span><span class="who">registry · preview</span><span class="d">Per-account registries with an MCP endpoint; AWS positions ARD as the federation layer between them.</span></a>
       <a href="https://neuronto.com/"><span class="n">Neuronto</span><span class="who">registry · independent</span><span class="d">Public ARD registry and the largest published publisher census.</span></a>
       <a href="https://ardvark.no/"><span class="n">Ardvark</span><span class="who">validator · open source</span><span class="d">Validator, indexer and MCP server for ARD manifests.</span></a>
       <a href="https://www.npmjs.com/package/ard-kit"><span class="n">ard-kit</span><span class="who">library</span><span class="d">Schemas and validators for building ARD tooling in JavaScript.</span></a>
@@ -726,11 +726,11 @@ a:focus-visible,button:focus-visible{outline:1px solid var(--cream); outline-off
       <div>
         <h4>Reference</h4>
         <ul>
-          <li><a href="#what">Overview</a></li>
+          <li><a href="#what">What ARD is</a></li>
           <li><a href="#publish">Publish</a></li>
           <li><a href="#validator">Validator</a></li>
           <li><a href="#fields">Field reference</a></li>
-          <li><a href="#discovery">Discovery</a></li>
+          <li><a href="#discovery">Routes</a></li>
         </ul>
       </div>
       <div>
