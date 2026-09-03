@@ -760,7 +760,7 @@ wall.innerHTML = PUBLISHERS.slice(0, 18).map(p => '<a href="https://' + p[0] + '
 /* ---------- probe field: dot matrix ---------- */
 (function(){
   const cv = document.getElementById("field"); if (!cv) return;
-  const ctx = cv.getContext("2d");
+  const ctx = cv.getContext("2d"); if (!ctx) return;
   // seed: one dot per (domain, entry) up to a cap, plus background grid
   const cells = [];
   PUBLISHERS.forEach(p => { const n = Math.min(p[1], 40); for (let i = 0; i < n; i++) cells.push(p[2] ? 2 : 1); });
