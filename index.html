@@ -257,6 +257,27 @@ footer a{color:var(--ink-2); text-decoration:none}
 footer a:hover{color:var(--ink)}
 footer p{color:var(--ink-3); font-size:13px; max-width:44ch}
 footer .base{display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap; margin-top:56px; padding-top:22px; border-top:1px solid var(--line); font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-4)}
+
+/* balance + accents (rev 2) */
+:root{ --slate:#8FA3C4; }
+.split{align-items:center}
+.split .copy{max-width:52ch}
+h2 em{color:var(--cream-2)}
+p.lede{font-size:16px; color:var(--ink-2); line-height:1.6}
+p.lede strong{color:var(--ink); font-weight:500}
+.eyebrow .num{color:var(--cream-2)}
+.card-head span:not(.title):not(.right):not(.pill){color:var(--slate)}
+.kv .v.path{color:var(--slate)}
+.steps .t{color:var(--cream)}
+.stats .big{color:var(--cream)}
+.note{margin-top:26px}
+.note .lbl{color:var(--slate)}
+td.t{color:var(--slate)}
+.tw{margin-top:48px}
+section{padding:104px 0}
+@media (max-width:760px){ section{padding:72px 0} }
+.card pre{max-height:420px}
+
 a:focus-visible,button:focus-visible{outline:1px solid var(--cream); outline-offset:3px}
 @media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} *{transition:none!important} }
 </style>
@@ -270,7 +291,7 @@ a:focus-visible,button:focus-visible{outline:1px solid var(--cream); outline-off
       Agentic Resources
     </a>
     <nav aria-label="Sections">
-      <a href="#what" data-opt>Overview</a>
+      <a href="#what" data-opt>What ARD is</a>
       <a href="#publish">Publish</a>
       <a href="#validator">Validator</a>
       <a href="#adoption" data-opt>Adoption</a>
@@ -288,14 +309,14 @@ a:focus-visible,button:focus-visible{outline:1px solid var(--cream); outline-off
     <div class="hero-grid">
       <div>
         <h1>The reference<br>for agent discovery</h1>
-        <p class="lede">Agentic Resource Discovery is how an agent finds a capability before it calls one. This is the independent guide to it: what the spec says, how to publish, a validator that runs in your browser, and adoption measured rather than asserted.</p>
+        <p class="lede">Agentic Resource Discovery is how an agent finds a capability before it calls one. <strong>This is the independent guide to it:</strong> what the spec says, how to publish, a validator that runs in your browser, and adoption measured rather than asserted.</p>
         <div class="acts">
           <a class="btn primary" href="#publish">Publish a catalogue <span class="arr">&rarr;</span></a>
           <a class="btn" href="#validator">Validate a manifest</a>
         </div>
       </div>
       <div class="aside">
-        <a class="textlink" href="#first">Read the path-split finding <span>&rarr;</span></a>
+        <a class="textlink" href="#adoption">Read the adoption finding <span>&rarr;</span></a>
       </div>
     </div>
   </div>
@@ -314,43 +335,6 @@ a:focus-visible,button:focus-visible{outline:1px solid var(--cream); outline-off
   </div>
 </div>
 
-<!-- ================= PATH SPLIT ================= -->
-<section id="first">
-  <div class="wrap">
-    <div class="split">
-      <div class="copy">
-        <p class="eyebrow">01 &middot; Read this first</p>
-        <h2>The spec says <em>ard.json</em>. The web still says <em>ai-catalog.json</em>.</h2>
-        <p class="lede">Version 0.91 renamed the manifest. Consumers must fetch the new path and may fall back to the old one. The deployed base has not followed: every publisher we found serves the old path, and only six also serve the new one. Any tool that checks only <code>ard.json</code> will conclude that almost nobody has adopted ARD. That is a measurement error, not a fact.</p>
-        <div class="note">
-          <span class="lbl">What to do</span>
-          <p>Serve the identical manifest at both paths until the rename settles. A conformant consumer finds you on <code>ard.json</code>; everything built before late August finds you on <code>ai-catalog.json</code>.</p>
-          <p>The specification is days old at v0.91 and still carries Proposal status. Every claim on this page names the version and date it was checked against.</p>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-head"><span class="title">Probe</span><span>4 Sep 2026</span><span class="right"><span class="pill">&#9679; 31 / 50 serving</span></span></div>
-        <div class="body">
-          <div class="kv">
-            <div><span class="l">Path</span><span class="v">/.well-known/ai-catalog.json</span></div>
-            <div><span class="l">Publishers found</span><span class="v">31 of 31</span></div>
-            <div><span class="l">Path</span><span class="v">/.well-known/ard.json</span></div>
-            <div><span class="l">Publishers found</span><span class="v">6 of 31</span></div>
-            <div><span class="l">Launch backers at root</span><span class="v">1 of 11</span></div>
-            <div><span class="l">Spec's own domain</span><span class="v">no manifest</span></div>
-          </div>
-        </div>
-        <pre><span class="c">// GET https://railway.com/.well-known/ard.json</span>
-<span class="g">200 OK</span>  <span class="c">application/json  8 entries</span>
-<span class="c">// GET https://zapier.com/.well-known/ard.json</span>
-<span class="k">404</span>     <span class="c">falls back to ai-catalog.json → 200, 14 entries</span>
-<span class="c">// GET https://google.com/.well-known/ard.json</span>
-<span class="k">404</span>     <span class="c">no manifest at either path</span></pre>
-        <div class="foot"><span class="ok">&#9679; ai-catalog.json 31</span><span>ard.json 6</span><span class="bad">&#9679; none 19</span><span><a href="/data/probe-2026-09-04.json" style="color:inherit">raw json</a></span></div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- ================= WHAT ================= -->
 <section id="what">
@@ -380,14 +364,14 @@ a:focus-visible,button:focus-visible{outline:1px solid var(--cream); outline-off
         <div class="foot"><span>score = relevance only</span><span>trust is evaluated separately</span></div>
       </div>
       <div class="copy">
-        <p class="eyebrow">02 &middot; Overview</p>
-        <h2>A search layer for capabilities, indexed from files you host</h2>
-        <p class="lede">Today an agent can only use tools somebody wired in by hand. ARD adds the missing discovery surface. Publishers describe resources under their own domain, registries index them, and a client asks in plain language for the capability it needs. Domain ownership is the trust anchor, the way it is for email and the web.</p>
+        <p class="eyebrow"><span class="num">01</span> What ARD is</p>
+        <h2>Search for capabilities, indexed from a file you host</h2>
+        <p class="lede">Today an agent can only use tools somebody wired in by hand. ARD adds the missing step: <strong>you describe what you offer once, on your own domain, and any registry can index it and answer plain-language queries against it.</strong> Domain ownership is the trust anchor.</p>
         <ol class="steps">
-          <li><span class="n">01</span><div><span class="t">Publish</span><div class="d">One JSON-LD manifest on your domain lists your MCP servers, A2A agents, skills, APIs and workflows, each with example queries it answers well.</div></div></li>
-          <li><span class="n">02</span><div><span class="t">Index</span><div class="d">Any ARD registry, public or private, fetches manifests and builds a semantic index. Enterprises run their own and merge internal, vendor and public results.</div></div></li>
-          <li><span class="n">03</span><div><span class="t">Search</span><div class="d">A client sends natural-language text and filters and gets ranked entries back.</div></div></li>
-          <li><span class="n">04</span><div><span class="t">Connect</span><div class="d">The client calls the winner over its native protocol. The registry never sits in the call path. MCP tells an agent how to call a tool; ARD tells it which one exists and where.</div></div></li>
+          <li><span class="n">01</span><div><span class="t">Publish</span><div class="d">One manifest lists your MCP servers, agents, skills and APIs, each with example queries it serves.</div></div></li>
+          <li><span class="n">02</span><div><span class="t">Index</span><div class="d">Public and private registries fetch manifests and build a semantic index.</div></div></li>
+          <li><span class="n">03</span><div><span class="t">Search</span><div class="d">A client asks in natural language and gets ranked entries back.</div></div></li>
+          <li><span class="n">04</span><div><span class="t">Connect</span><div class="d">The client calls the winner over its native protocol. MCP says how to call a tool; ARD says which one exists and where.</div></div></li>
         </ol>
       </div>
     </div>
@@ -411,16 +395,16 @@ a:focus-visible,button:focus-visible{outline:1px solid var(--cream); outline-off
   <div class="wrap">
     <div class="split">
       <div class="copy">
-        <p class="eyebrow">03 &middot; Publish</p>
+        <p class="eyebrow"><span class="num">02</span> Publish</p>
         <h2>A minimal manifest</h2>
-        <p class="lede">A manifest is a JSON document with an <code>entries</code> array. Each entry is a JSON-LD node and needs four things: a domain-anchored <code>identifier</code>, a <code>displayName</code>, a <code>type</code> given as an IANA media type, and exactly one of <code>url</code> or <code>data</code>. Add two to five <code>representativeQueries</code> or registries cannot rank you.</p>
+        <p class="lede">A manifest is a JSON file with an <code>entries</code> array. <strong>Each entry needs four things:</strong> a domain-anchored <code>identifier</code>, a <code>displayName</code>, a <code>type</code> as an IANA media type, and one of <code>url</code> or <code>data</code>. Add two to five <code>representativeQueries</code> or registries cannot rank you.</p>
         <div class="note">
-          <span class="lbl">The identifier</span>
-          <p>Identifiers take the form <code>urn:air:&lt;publisher&gt;:&lt;namespace&gt;:&lt;name&gt;</code>, where the publisher is a domain you control. The prefix is <code>air</code>, not <code>ard</code>. A verifying registry rejects an entry claiming <code>urn:air:google.com:&hellip;</code> unless <code>trustManifest.identity</code> can prove it was issued by google.com. That is the whole defence against namespace squatting.</p>
+          <span class="lbl">Identifier</span>
+          <p><code>urn:air:&lt;publisher&gt;:&lt;namespace&gt;:&lt;name&gt;</code>, where the publisher is a domain you control. The prefix is <code>air</code>, not <code>ard</code>. A registry rejects <code>urn:air:google.com:&hellip;</code> unless the trust manifest proves google.com issued it.</p>
         </div>
         <div class="note">
-          <span class="lbl">Where to serve it</span>
-          <p><code>https://example.com/.well-known/ard.json</code> and <code>/.well-known/ai-catalog.json</code>, with <code>Content-Type: application/json</code>. Add <code>&lt;link rel="ard" href="/.well-known/ard.json"&gt;</code> to your home page.</p>
+          <span class="lbl">Serve it at both paths</span>
+          <p><code>/.well-known/ard.json</code> is the current name. <code>/.well-known/ai-catalog.json</code> is the one the deployed web still uses; every publisher we found serves it and only six serve the new name. Serve the same file at both, and add <code>&lt;link rel="ard"&gt;</code> to your home page.</p>
         </div>
       </div>
       <div class="card">
@@ -461,7 +445,7 @@ a:focus-visible,button:focus-visible{outline:1px solid var(--cream); outline-off
         </tbody>
       </table>
     </div>
-    <p class="small" style="margin-top:14px">The spec asks intermediaries not to verify these values strictly while registration is pending. Everything in this section was checked against the v0.91 text and JSON Schema on 4 September 2026; nothing is inferred from secondary coverage.</p>
+    <p class="small" style="margin-top:14px">Checked against the v0.91 text and JSON Schema on 4 September 2026. The spec asks intermediaries not to verify type values strictly while IANA registration is pending.</p>
   </div>
 </section>
 
@@ -470,9 +454,9 @@ a:focus-visible,button:focus-visible{outline:1px solid var(--cream); outline-off
   <div class="wrap">
     <div class="split" style="align-items:end; margin-bottom:40px">
       <div class="copy">
-        <p class="eyebrow">04 &middot; Validator</p>
+        <p class="eyebrow"><span class="num">03</span> Validator</p>
         <h2>Check a manifest before a registry does</h2>
-        <p class="lede">Runs entirely in your browser; nothing is uploaded. Accepts a full manifest or a single entry and implements the structural rules and discovery constraints from Appendix D of the spec. A pre-flight check, not the official suite.</p>
+        <p class="lede">Runs in your browser; nothing is uploaded. <strong>Paste a manifest or a single entry</strong> and it checks the structural rules and discovery constraints from Appendix D of the spec.</p>
       </div>
       <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end">
         <button class="btn sm" id="loadValid" type="button">Load valid</button>
@@ -500,9 +484,9 @@ a:focus-visible,button:focus-visible{outline:1px solid var(--cream); outline-off
 <!-- ================= FIELDS ================= -->
 <section id="fields">
   <div class="wrap">
-    <p class="eyebrow">05 &middot; Field reference</p>
+    <p class="eyebrow"><span class="num">04</span> Field reference</p>
     <h2>Every term in the base context</h2>
-    <p class="lede" style="margin-top:22px">Terms written without a prefix belong to the default namespace, <code>https://agenticresourcediscovery.org/ns#</code>. An entry may declare extra namespaces in its <code>@context</code> and use prefixed terms from them; registries index what they recognise and preserve the rest.</p>
+    <p class="lede" style="margin-top:22px">Unprefixed terms belong to the default namespace. An entry may declare extra namespaces in <code>@context</code>; registries index what they recognise and keep the rest.</p>
     <div class="tw">
       <table>
         <thead><tr><th>Term</th><th>Type</th><th>Req.</th><th>Purpose</th></tr></thead>
@@ -532,9 +516,9 @@ a:focus-visible,button:focus-visible{outline:1px solid var(--cream); outline-off
 <!-- ================= DISCOVERY ================= -->
 <section id="discovery">
   <div class="wrap">
-    <p class="eyebrow">06 &middot; How discovery works</p>
+    <p class="eyebrow"><span class="num">05</span> Routes</p>
     <h2>Two layers, five publishing routes</h2>
-    <p class="lede" style="margin-top:22px">ARD separates static publishing from dynamic indexing. You publish; registries crawl and expose search. Most coverage mentions only the well-known file. The spec defines five routes, and a consumer is only required to honour two of them.</p>
+    <p class="lede" style="margin-top:22px">You publish; registries crawl and expose search. <strong>The spec defines five ways to advertise a manifest and requires consumers to honour two.</strong> Only one registry endpoint is mandatory.</p>
     <div class="tw">
       <table>
         <thead><tr><th>Static route</th><th>Consumer obligation</th><th>How</th></tr></thead>
@@ -564,14 +548,14 @@ a:focus-visible,button:focus-visible{outline:1px solid var(--cream); outline-off
 <!-- ================= ADOPTION ================= -->
 <section id="adoption">
   <div class="wrap">
-    <p class="eyebrow ok">07 &middot; Adoption</p>
+    <p class="eyebrow ok"><span class="num">06</span> Adoption</p>
     <h2>Measured, <em>not asserted</em></h2>
-    <p class="lede" style="margin-top:22px">Every announcement describes ARD as industry-backed, which is true, and then implies it is widely deployed, which is a separate claim. Here is what has actually been counted, starting with our own probe. The method and the full domain list are published so you can repeat it.</p>
+    <p class="lede" style="margin-top:22px">Every announcement calls ARD industry-backed, which is true, and implies it is widely deployed, which is a separate claim. <strong>Here is what has been counted, starting with our own probe.</strong> Method and domain list are published so you can repeat it.</p>
     <div class="stats">
       <div>
         <div class="big">31<small>/ 50</small></div>
         <div class="lbl">Domains serving a manifest</div>
-        <p>Fifty domains fetched at both well-known paths on 4 September 2026: the 11 launch backers' root domains, the spec's own domain, a sample of known publishers, and a control group of large API companies.</p>
+        <p>Fifty domains fetched at both paths on 4 September 2026: the 11 launch backers, the spec's own domain, known publishers, and a control group of large API companies.</p>
       </div>
       <div>
         <div class="big">6<small>/ 31</small></div>
@@ -581,7 +565,35 @@ a:focus-visible,button:focus-visible{outline:1px solid var(--cream); outline-off
       <div>
         <div class="big">1<small>/ 11</small></div>
         <div class="lbl">Launch backers publishing at root</div>
-        <p>Of Google, Microsoft, GitHub, Hugging Face, Cisco, Databricks, Nvidia, Salesforce, ServiceNow, Snowflake and GoDaddy, only Hugging Face serves a manifest at its root. GitHub publishes 251 entries at a subdomain. The spec's own domain serves none.</p>
+        <p>Only Hugging Face serves a manifest at its root domain. GitHub publishes 251 entries at a subdomain. The spec's own domain serves none.</p>
+      </div>
+    </div>
+
+    <div class="split" style="margin-top:88px">
+      <div class="copy">
+        <p class="eyebrow"><span class="num">Finding</span> The path split</p>
+        <h2>The spec says <em>ard.json</em>. The web still says <em>ai-catalog.json</em>.</h2>
+        <p class="lede">Version 0.91 renamed the manifest. <strong>Every publisher we found still serves the old name, and only six also serve the new one.</strong> A tool that checks only <code>ard.json</code> will report that almost nobody has adopted ARD. That is a measurement error, not a fact.</p>
+      </div>
+      <div class="card">
+        <div class="card-head"><span class="title">Probe</span><span>4 Sep 2026</span><span class="right"><span class="pill">&#9679; 31 / 50 serving</span></span></div>
+        <div class="body">
+          <div class="kv">
+            <div><span class="l">Path</span><span class="v path">/.well-known/ai-catalog.json</span></div>
+            <div><span class="l">Publishers found</span><span class="v">31 of 31</span></div>
+            <div><span class="l">Path</span><span class="v path">/.well-known/ard.json</span></div>
+            <div><span class="l">Publishers found</span><span class="v">6 of 31</span></div>
+            <div><span class="l">Launch backers at root</span><span class="v">1 of 11</span></div>
+            <div><span class="l">Spec's own domain</span><span class="v">no manifest</span></div>
+          </div>
+        </div>
+        <pre><span class="c">// GET https://railway.com/.well-known/ard.json</span>
+<span class="g">200 OK</span>  <span class="c">application/json  8 entries</span>
+<span class="c">// GET https://zapier.com/.well-known/ard.json</span>
+<span class="k">404</span>     <span class="c">falls back to ai-catalog.json → 200, 14 entries</span>
+<span class="c">// GET https://google.com/.well-known/ard.json</span>
+<span class="k">404</span>     <span class="c">no manifest at either path</span></pre>
+        <div class="foot"><span class="ok">&#9679; ai-catalog.json 31</span><span>ard.json 6</span><span class="bad">&#9679; none 19</span><span><a href="/data/probe-2026-09-04.json" style="color:inherit">raw json</a></span></div>
       </div>
     </div>
     <div class="tw">
@@ -594,7 +606,7 @@ a:focus-visible,button:focus-visible{outline:1px solid var(--cream); outline-off
         </tbody>
       </table>
     </div>
-    <p class="small" style="margin-top:14px">The three numbers disagree by two orders of magnitude because the crawl frames differ. Read the ratio, not the count: publishing is real but thin, and concentrated among developer-tool companies. Serving a manifest says nothing about trust, quality or conformance.</p>
+    <p class="small" style="margin-top:14px">The counts differ by two orders of magnitude because the crawl frames differ. Read the ratio: publishing is real but thin, and concentrated among developer-tool companies. Serving a manifest says nothing about trust or quality.</p>
     <details>
       <summary>Method and full domain list</summary>
       <div class="body">
@@ -605,8 +617,8 @@ a:focus-visible,button:focus-visible{outline:1px solid var(--cream); outline-off
     </details>
     <div class="note">
       <span class="lbl">How to read this</span>
-      <p>Thin publisher adoption days after a v0.91 proposal is unremarkable. The registry side shipped first: GitHub's Agent Finder, Hugging Face's Discover tool, Google Cloud Agent Registry and AWS Agent Registry all consume ARD today, so the incentive to publish is arriving from the platforms rather than from the spec. The honest comparison is <code>llms.txt</code>, which had enormous discourse and, for a long while, negligible adoption, and then became a default in framework tooling.</p>
-      <p>These numbers are published here because nobody whose business depends on ARD succeeding is in a position to publish them.</p>
+      <p>Thin publisher adoption days after a v0.91 proposal is unremarkable. The registry side shipped first: GitHub, Hugging Face, Google Cloud and AWS all consume ARD today, so the pressure to publish is arriving from the platforms. The honest comparison is <code>llms.txt</code>: enormous discourse, negligible adoption for a long while, then a default in framework tooling.</p>
+      <p>These numbers appear here because nobody whose business depends on ARD succeeding is in a position to publish them.</p>
     </div>
   </div>
 </section>
@@ -614,9 +626,9 @@ a:focus-visible,button:focus-visible{outline:1px solid var(--cream); outline-off
 <!-- ================= DIRECTORY ================= -->
 <section id="directory" class="dir">
   <div class="wrap">
-    <p class="eyebrow">08 &middot; Directory</p>
+    <p class="eyebrow"><span class="num">07</span> Directory</p>
     <h2>Verified publishers</h2>
-    <p class="lede" style="margin-top:22px">Every domain below served a parseable manifest when we fetched it. Listing is free and automatic: publish a manifest and it appears on the next probe. Nobody is listed for money, and nobody can pay to be ranked.</p>
+    <p class="lede" style="margin-top:22px">Every domain below served a parseable manifest when fetched. <strong>Listing is free and automatic:</strong> publish a manifest and you appear on the next probe. Nobody is listed for money and nobody can pay to be ranked.</p>
     <div class="dir-head">
       <input type="search" id="dirFilter" placeholder="Filter by domain" aria-label="Filter publishers">
       <span class="count" id="dirCount"></span>
@@ -649,11 +661,11 @@ a:focus-visible,button:focus-visible{outline:1px solid var(--cream); outline-off
 <!-- ================= SERVICE ================= -->
 <section id="service" class="service">
   <div class="wrap">
-    <div class="split">
+    <div class="split" style="align-items:start">
       <div class="copy">
-        <p class="eyebrow">09 &middot; Get published</p>
+        <p class="eyebrow"><span class="num">08</span> Get published</p>
         <h2>We write, validate and publish your catalogue</h2>
-        <p class="lede">Most companies already have the resources: an MCP server, a public API, a few agents. What they lack is the afternoon it takes to describe them correctly, at both paths, with representative queries a registry can actually rank. We do that part.</p>
+        <p class="lede">You already have the resources: an MCP server, a public API, a few agents. <strong>What is missing is the afternoon it takes to describe them correctly</strong>, at both paths, with queries a registry can rank. We do that part.</p>
         <ul class="bullets">
           <li>An inventory of everything on your domain an agent could call: MCP servers, A2A agents, skills, OpenAPI services, workflows.</li>
           <li>A manifest that passes the official conformance CLI, served at both paths, with the link tag and, where useful, the robots and DNS routes.</li>
