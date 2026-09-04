@@ -684,20 +684,9 @@ a:focus-visible,button:focus-visible{outline:1px solid var(--cream); outline-off
           <div><label for="f-name">Name</label><input id="f-name" name="name" type="text" autocomplete="name" required></div>
           <div><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
         </div>
-        <label for="f-domain">Domain to publish for</label>
-        <input id="f-domain" name="domain" type="text" placeholder="example.com" autocomplete="url" required>
-        <label>What you have</label>
-        <div class="chips">
-          <label><input type="checkbox" name="has" value="MCP server"> MCP server</label>
-          <label><input type="checkbox" name="has" value="A2A agent"> A2A agent</label>
-          <label><input type="checkbox" name="has" value="Public API"> Public API</label>
-          <label><input type="checkbox" name="has" value="Skills"> Skills</label>
-          <label><input type="checkbox" name="has" value="Not sure yet"> Not sure yet</label>
-        </div>
-        <label for="f-msg">Anything else</label>
-        <textarea id="f-msg" name="message" placeholder="Timelines, existing manifests, who else needs to be involved."></textarea>
-        <button class="btn primary" type="submit">Send enquiry <span class="arr">&rarr;</span></button>
-        <p class="fine">Opens a pre-filled email to <a href="mailto:info@belgravialabs.com">info@belgravialabs.com</a>. We reply within one working day. No mailing list. Visit counts use Cloudflare Web Analytics, which sets no cookies and stores no personal data.</p>
+        <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
+        <button class="btn primary" type="submit">Get in touch <span class="arr">&rarr;</span></button>
+        <p class="fine" id="enq-note">We reply within one working day. No mailing list. Visit counts use Cloudflare Web Analytics, which sets no cookies and stores no personal data.</p>
       </form>
     </div>
   </div>
@@ -962,14 +951,23 @@ document.getElementById("loadBroken").addEventListener("click", () => { docEl.va
 docEl.value = JSON.stringify(VALID, null, 2); validate();
 
 /* ---------- enquiry ---------- */
-document.getElementById("enq").addEventListener("submit", e => {
+document.getElementById("enq").addEventListener("submit", async e => {
   e.preventDefault();
-  const f = e.target;
-  const name = f.name.value.trim(), email = f.email.value.trim(), domain = f.domain.value.trim().replace(/^https?:\/\//, "").replace(/\/.*$/, "");
-  if (!name || !email || !domain){ [f.name, f.email, f.domain].find(x => !x.value.trim()).focus(); return; }
-  const has = Array.from(f.querySelectorAll('input[name="has"]:checked')).map(x => x.value);
-  const body = ["Name: " + name, "Email: " + email, "Domain: " + domain, "Resources: " + (has.length ? has.join(", ") : "not specified"), "", f.message.value.trim(), "", "Sent from agenticresources.dev"].join("\n");
-  window.location.href = "mailto:info@belgravialabs.com?subject=" + encodeURIComponent("ARD publishing enquiry: " + domain) + "&body=" + encodeURIComponent(body);
+  const f = e.target, note = document.getElementById("enq-note"), btn = f.querySelector("button");
+  const name = f.name.value.trim(), email = f.email.value.trim();
+  if (!name || !email){ (!name ? f.name : f.email).focus(); return; }
+  btn.disabled = true; note.textContent = "Sending…";
+  try {
+    const r = await fetch("https://api.web3forms.com/submit", {
+      method: "POST", headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      body: JSON.stringify({ access_key: "6dbfcb66-75ce-486a-9f09-33193e597e2c", subject: "ARD enquiry from " + name, from_name: "agenticresources.dev", name, email, botcheck: f.botcheck.checked })
+    });
+    const j = await r.json();
+    if (!j.success) throw new Error(j.message || "failed");
+    f.reset(); note.textContent = "Thanks, " + name + ". We will reply to " + email + " within one working day.";
+  } catch (err) {
+    note.innerHTML = 'Something went wrong. Email us directly at <a href="mailto:info@belgravialabs.com">info@belgravialabs.com</a>.';
+  } finally { btn.disabled = false; }
 });
 </script>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "13b96c7f2f964f56900c42223dca5dac"}'></script>
