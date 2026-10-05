@@ -1,4 +1,10 @@
 {
+  "specVersion": "1.0",
+  "host": {
+    "displayName": "Agentic Resources: independent ARD reference",
+    "identifier": "did:web:agenticresources.dev",
+    "documentationUrl": "https://agenticresources.dev/"
+  },
   "entries": [
     {
       "@context": "https://agenticresourcediscovery.org/context/v1",
@@ -13,8 +19,16 @@
         "which companies publish an ARD catalogue",
         "validate an ARD entry"
       ],
-      "capabilities": ["ARDReference", "ARDValidator", "ARDPublisherDirectory"],
-      "tags": ["ard", "discovery", "reference"],
+      "capabilities": [
+        "ARDReference",
+        "ARDValidator",
+        "ARDPublisherDirectory"
+      ],
+      "tags": [
+        "ard",
+        "discovery",
+        "reference"
+      ],
       "version": "2026.09.04",
       "updatedAt": "2026-09-04T00:00:00Z"
     },
@@ -30,7 +44,11 @@
         "do the ARD launch partners publish a catalogue",
         "ard.json versus ai-catalog.json adoption"
       ],
-      "tags": ["ard", "adoption", "dataset"],
+      "tags": [
+        "ard",
+        "adoption",
+        "dataset"
+      ],
       "updatedAt": "2026-09-04T00:00:00Z"
     }
   ]
