@@ -966,7 +966,7 @@ document.getElementById("enq").addEventListener("submit", async e => {
     if (!j.success) throw new Error(j.message || "failed");
     f.reset(); note.textContent = "Thanks, " + name + ". We will reply to " + email + " within one working day.";
   } catch (err) {
-    note.innerHTML = 'Something went wrong. Email us directly at <a href="mailto:info@belgravialabs.com">info@belgravialabs.com</a>.';
+    note.textContent = "Something went wrong — please try submitting again in a moment.";
   } finally { btn.disabled = false; }
 });
 </script>
